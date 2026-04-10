@@ -15,7 +15,6 @@ st.title("🐾 Animal Pathway Identification using DBSCAN")
 # SIDEBAR
 # -----------------------------
 st.sidebar.header("DBSCAN Parameters")
-
 eps = st.sidebar.slider("Epsilon (eps)", 0.1, 1.0, 0.3)
 min_samples = st.sidebar.slider("Min Samples", 2, 20, 5)
 
@@ -33,7 +32,7 @@ if uploaded_file is not None:
     # Normalize column names
     df.columns = df.columns.str.lower()
 
-    # Handle different dataset formats
+    # Handle different formats
     if "location-lat" in df.columns and "location-long" in df.columns:
         df = df.rename(columns={
             "location-lat": "Latitude",
@@ -48,11 +47,11 @@ if uploaded_file is not None:
     # Clean data
     df = df[['Latitude', 'Longitude']].dropna().drop_duplicates()
 
-    # 🔥 Limit data for performance
+    # Limit for performance
     if len(df) > 500:
         df = df.sample(500, random_state=42)
 
-    st.write("### Cleaned Data Preview")
+    st.write("### Data Preview")
     st.dataframe(df.head())
 
     # -----------------------------
@@ -68,13 +67,7 @@ if uploaded_file is not None:
     # GRAPH (NO MATPLOTLIB)
     # -----------------------------
     st.write("### Cluster Visualization")
-
-    st.scatter_chart(
-        df,
-        x="Longitude",
-        y="Latitude",
-        color="Cluster"
-    )
+    st.scatter_chart(df, x="Longitude", y="Latitude", color="Cluster")
 
     # -----------------------------
     # MAP
