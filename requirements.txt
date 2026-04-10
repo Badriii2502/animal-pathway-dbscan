@@ -1,6 +1,6 @@
-streamlit
+streamlit==1.32.0
 pandas
-matplotlib
+matplotlib==3.7.1
 scikit-learn
 folium
 streamlit-folium
